@@ -10,7 +10,13 @@ The following command should install the main dependencies on most Linux (Ubuntu
 sudo apt-get install python-dev python-pip &&
 sudo pip install -r requirements.txt
 ``
+#### Download and extract MNIST
+* The script ``download.sh`` downloads and extracts mnist. Deafult storing directory is ```~/mnist folder```.
 
+```
+sudo chmod a+x download.sh
+./download.sh
+```
 
 ## Reference
 If you use this code as part of any published research, please acknowledge the following paper:
