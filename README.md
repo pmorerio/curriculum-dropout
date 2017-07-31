@@ -11,7 +11,7 @@ sudo apt-get install python-dev python-pip &&
 sudo pip install -r requirements.txt
 ``
 #### Download and extract MNIST
-* The script ``download.sh`` downloads and extracts mnist. Deafult storing directory is ```~/mnist folder```.
+* The script ``download.sh`` downloads and extracts mnist. Deafult storing directory is ```~/mnist```.
 
 ```
 sudo chmod a+x download.sh
