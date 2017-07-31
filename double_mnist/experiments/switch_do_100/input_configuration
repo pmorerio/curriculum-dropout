@@ -1,0 +1,25 @@
+## CONFIGURATION FILE: change here the number of hidden units, the training set file, etc.
+
+[MAIN_PARAMETER_SETTING]
+
+training_epochs = 200
+
+learning_rate = 0.0001
+momentum = 0.95
+
+noise = 0.01
+
+gamma = 100
+
+p_input = 0.9
+p_conv = 0.75
+p_fc = 0.5
+
+# no dropout is regular dropout with prob = 1.0
+#p_input = 1.0
+#p_conv = 1.0
+#p_fc = 1.0
+
+#regular_dropout or scheduled_dropout
+mode = switch_dropout
+
