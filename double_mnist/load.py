@@ -98,7 +98,7 @@ def doubleMnist(datasets_dir='/data/datasets/'):
 		
 def main():
 
-	data_ = open('data_dir.txt','r')
+	data_ = open('../data_dir.txt','r')
 	datasets_dir = data_.readline().split()[0]
 	double_mnist, labels, _, _= doubleMnist(datasets_dir)	
 	print 'label', labels[110,:]

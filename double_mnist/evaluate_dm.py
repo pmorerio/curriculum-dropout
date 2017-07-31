@@ -39,7 +39,7 @@ def tf_count(t, val):
 
 def trainModel(expDir='null', ii=0):
     
-    data_ = open('data_dir.txt','r')
+    data_ = open('../data_dir.txt','r')
     datasets_dir = data_.readline().split()[0]
     double_mnist = DataSet.read_data_sets(data_dir=datasets_dir)
     
