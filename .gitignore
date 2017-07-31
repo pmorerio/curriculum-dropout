@@ -4,3 +4,5 @@
 *.pkl.gz
 *.png
 *.npz
+
+!requirements.txt
