@@ -90,8 +90,8 @@ def trainModel(expDir='null', ii=0):
     
     
     # FIRST CONV LAYER
-    # The convolutional layer computes 32 features for each 5x5 patch. 
-    # Its weight tensor has a shape of [5, 5, 1, 32] [5x5 patch, input channels, output channels]
+    # The convolutional layer computes dim_conv1 features for each 5x5 patch. 
+    # Its weight tensor has a shape of [5, 5, 1, dim_conv1] [5x5 patch, input channels, output channels]
     dim_conv1 = int(96)
     W_conv1 = weight_variable([5, 5, 1, dim_conv1],noise)
     #  bias vector with a component for each output channel
@@ -116,7 +116,7 @@ def trainModel(expDir='null', ii=0):
     # Contruct the graph
     h_conv2 = tf.nn.relu(conv2d(h_pool1_drop, W_conv2) + b_conv2)
     h_pool2 = max_pool_3x3(h_conv2) # now the image is 16*16
-    h_pool2_drop = tf.nn.dropout(h_pool2, keep_prob_fc)
+    h_pool2_drop = tf.nn.dropout(h_pool2, keep_prob_conv)
     
     ## THIRD CONV LAYER
     # Initialize variables
@@ -239,9 +239,6 @@ def trainModel(expDir='null', ii=0):
                 accValSet.append(valid_accuracy)
                 #print("Droput prob: %f"%(prob))
         
-                ## Early stopping
-                #if len(accValSet)>5 and accValSet[-1]<accValSet[-2]:
-                    #break
             duration = time.time()-start_time  
             start_time=time.time()
             print("step %d: \t cross entropy: %f \t training accuracy: %f \t test accuracy: %f \t valid accuracy: %f \t prob_fc: %f \t time: %f"\
@@ -250,29 +247,17 @@ def trainModel(expDir='null', ii=0):
             #start = time.time()
         ## The actual training step
         batch = double_mnist.train.next_batch(batchsize)
-        # SCHEDULING DROPOUT: no droput at first, tends to 0.5 as iterations increase
+        # SCHEDULING DROPOUT: no droput at first, tends to some value as iterations increase
         train_step.run(feed_dict={
                                 x: batch[0], y_: batch[1], 
                                 keep_prob_input: _prob_input,    
                                 keep_prob_conv: _prob_conv,   
                                 keep_prob_fc: _prob_fc})    # CHANGE HERE
         
-        #vals = bin_2_flat.eval(feed_dict={x: batch[0], y_: batch[1], keep_prob: _prob(i, gamma, p_hidden)})
-        #print np.unique(_vals)
-        
+       
             
     #!# End of training iterations #
     
-    
-    # Finally test on the test set #
-    ## Testing on small gpus must be done batch-wise to avoid OOM
-    #test_accuracy=0
-    #for j in range(num_test_batches):
-        #batch = double_mnist.test.next_batch(test_batchsize)
-        #test_accuracy += accuracy.eval(feed_dict={
-        #x:batch[0], y_: batch[1],  keep_prob_input: 1.0, keep_prob_conv: 1.0, keep_prob_fc: 1.0}) # no dropout
-    
-    #print("test accuracy: %g"%(test_accuracy/num_test_batches))
     
     f = file(expDir+str(ii)+'_accuracies.pkl', 'w')
     cPickle.dump((accTrSet, accValSet, accTeSet, Xentr,gammaValues), f, protocol=cPickle.HIGHEST_PROTOCOL)
