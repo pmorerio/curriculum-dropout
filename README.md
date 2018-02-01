@@ -22,7 +22,7 @@ sudo chmod a+x download.sh
 If you use this code as part of any published research, please acknowledge the following paper:
 
 **"Curriculum Dropout"**  
-Pietro Morerio, Jacopo Cavazza, Riccardo Volpi, René Vidal and Vittorio Murino *[arXiv](https://arxiv.org/abs/1703.06229)*
+Pietro Morerio, Jacopo Cavazza, Riccardo Volpi, René Vidal and Vittorio Murino *[pdf](http://openaccess.thecvf.com/content_iccv_2017/html/Morerio_Curriculum_Dropout_ICCV_2017_paper.html)* 
 
     @InProceedings{Morerio2017dropout,
         title={Curriculum Dropout},
