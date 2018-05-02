@@ -11,12 +11,17 @@ sudo apt-get install python-dev python-pip &&
 sudo pip install -r requirements.txt
 ``
 #### Download and extract MNIST
-* The script ``download.sh`` downloads and extracts mnist. Deafult storing directory is ```~/mnist```.
+* The script ``download.sh`` downloads and extracts mnist. Deafult storing directory is ```~/mnist```. 
 
 ```
 sudo chmod a+x download.sh
 ./download.sh
 ```
+Move the ```mnist/``` folder wherever you like (e.g. ```/mydata```) and then tell the training scripts where to find it
+```
+echo /mydata >> data_dir.txt
+```
+
 
 ## Reference
 If you use this code as part of any published research, please acknowledge the following paper:
